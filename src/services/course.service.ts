@@ -1,5 +1,5 @@
-import { Course } from '../database/schemas/course'
-import { Theme } from '../database/schemas/theme'
+import { Course } from '../database/schemas/course.schema'
+import { Theme } from '../database/schemas/theme.schema'
 
 class CourseService {
 	async findAll() {

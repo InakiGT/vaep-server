@@ -1,7 +1,7 @@
-import { Course } from '../database/schemas/course'
-import { MultipleChoiceQuestion } from '../database/schemas/mcquestion'
+import { Course } from '../database/schemas/course.schema'
+import { MultipleChoiceQuestion } from '../database/schemas/mcquestion.schema'
 import { OpenQuestion } from '../database/schemas/openequestion.schema'
-import { Theme } from '../database/schemas/theme'
+import { Theme } from '../database/schemas/theme.schema'
 
 class ThemeService {
 	async findAll() {

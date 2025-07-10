@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import { Theme } from '../schemas/theme'
-import { Course } from '../schemas/course'
+import { Theme } from '../schemas/theme.schema'
+import { Course } from '../schemas/course.schema'
 
 dotenv.config()
 

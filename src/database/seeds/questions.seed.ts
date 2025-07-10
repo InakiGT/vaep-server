@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import { OpenQuestion } from '../schemas/openequestion.schema'
-import { Theme } from '../schemas/theme'
-import { MultipleChoiceQuestion } from '../schemas/mcquestion'
+import { Theme } from '../schemas/theme.schema'
+import { MultipleChoiceQuestion } from '../schemas/mcquestion.schema'
 
 dotenv.config()
 

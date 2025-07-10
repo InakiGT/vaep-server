@@ -1,5 +1,5 @@
 import { OpenQuestion } from '../database/schemas/openequestion.schema'
-import { MultipleChoiceQuestion } from '../database/schemas/mcquestion'
+import { MultipleChoiceQuestion } from '../database/schemas/mcquestion.schema'
 
 class QuestionsService {
 	async findAll() {

@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
-import { Course } from '../schemas/course'
+import { Course } from '../schemas/course.schema'
 
 dotenv.config()
 
