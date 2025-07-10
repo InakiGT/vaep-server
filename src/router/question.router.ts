@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import QuestionsService from '../services/questions.service'
+import passport from 'passport'
 
 const router = Router()
 const service = new QuestionsService()
@@ -317,7 +318,9 @@ router.get('/theme', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.post('/multipleChoice', async (req, res) => {
+router.post('/multipleChoice',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { body } = req
 		const data = await service.createMultipleChoice(body)
@@ -361,7 +364,9 @@ router.post('/multipleChoice', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.post('/open', async (req, res) => {
+router.post('/open',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { body } = req
 		const data = await service.createOpen(body)
@@ -405,7 +410,9 @@ router.post('/open', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.patch('/multipleChoice/:id', async (req, res) => {
+router.patch('/multipleChoice/:id',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { id } = req.params
 		const { body } = req
@@ -449,7 +456,9 @@ router.patch('/multipleChoice/:id', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.patch('/open/:id', async (req, res) => {
+router.patch('/open/:id',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { id } = req.params
 		const { body } = req
@@ -487,7 +496,9 @@ router.patch('/open/:id', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.delete('/multipleChoice/:id', async (req, res) => {
+router.delete('/multipleChoice/:id',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { id } = req.params
 
@@ -525,7 +536,9 @@ router.delete('/multipleChoice/:id', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.delete('/open/:id', async (req, res) => {
+router.delete('/open/:id',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { id } = req.params
 

@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import CourseService from '../services/course.service'
+import passport from 'passport'
 
 const router = Router()
 const service = new CourseService()
@@ -119,7 +120,9 @@ router.get('/:id', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.post('/', async (req, res) => {
+router.post('/',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { body } = req
 		const data = await service.create(body)
@@ -167,7 +170,9 @@ router.post('/', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.patch('/:id', async (req, res) => {
+router.patch('/:id',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { id } = req.params
 		const { body } = req
@@ -205,7 +210,9 @@ router.patch('/:id', async (req, res) => {
  *       500:
  *         description: Error interno del servidor
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',
+	passport.authenticate('jwt', { session: false }),
+	async (req, res) => {
 	try {
 		const { id } = req.params
 
