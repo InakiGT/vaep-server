@@ -11,9 +11,9 @@
     "db:dev:seed:courses": "ts-node ./src/database/seeds/courses.seed.ts",
     "db:dev:seed:themes": "ts-node ./src/database/seeds/themes.seed.ts",
     "db:dev:seed:questions": "ts-node ./dist/database/seeds/questions.seed.ts",
-    "db:seed:courses": "ts-node ./dist/database/seeds/courses.seed.ts",
-    "db:seed:themes": "ts-node ./dist/database/seeds/themes.seed.ts",
-    "db:seed:questions": "ts-node ./dist/database/seeds/questions.seed.ts"
+    "db:seed:courses": "ts-node ./dist/database/seeds/courses.seed.js",
+    "db:seed:themes": "ts-node ./dist/database/seeds/themes.seed.js",
+    "db:seed:questions": "ts-node ./dist/database/seeds/questions.seed.js"
   },
   "keywords": [],
   "author": "",
