@@ -10,7 +10,7 @@ const swaggerDefinition = {
   },
   servers: [
     {
-      url: `${ config.server }:${ config.port }`,
+      url: `${ config.server }`,
     },
   ],
 }
