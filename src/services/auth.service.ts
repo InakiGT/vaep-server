@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import config from '../config/index'
 import UserService from './user.service'
 import bcrypt from 'bcrypt'
+import { sendEmail } from '../utils/email/nodemailer'
 
 class AuthService {
 	userService: UserService
@@ -42,6 +43,29 @@ class AuthService {
 		const token = jwt.sign(payload, config.jwtSecret)
 
 		return token
+	}
+
+	async generateToken(email: string) {
+		const payload = {
+			sub: email,
+			exp: Math.floor(Date.now() / 1000) + (60 * 60),
+		}
+
+		const token = jwt.sign(payload, config.jwtSecret)
+
+		await sendEmail(email, token)
+
+		return true
+	}
+
+	async resetPassword(email: string, newPassword: string) {
+		try {
+			await this.userService.updateByEmail(email, { password: newPassword })
+
+			return true
+		} catch (err) {
+			throw err
+		}
 	}
 }
 

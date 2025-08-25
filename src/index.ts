@@ -7,6 +7,7 @@ import StartDB from './database'
 import appRouter from './router'
 import swaggerSpec from './swagger'
 import './utils/auth'
+import { errorHandler } from './middlewares/error.handler'
 
 dotenv.config()
 
@@ -20,6 +21,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 StartDB()
 
 appRouter(app)
+app.use(errorHandler)
 
 app.listen(config.port, () => {
 	console.log(`Server listening on port: ${ config.port }`)

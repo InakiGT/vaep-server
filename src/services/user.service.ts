@@ -49,6 +49,8 @@ class UserService {
 				throw new Error('Invalid data')
 			}
 
+			await User.syncIndexes()
+
 			const password = await bcrypt.hash(userData.password, 10)
 
 			userData.password = password
@@ -71,6 +73,22 @@ class UserService {
 			}
 
 			const response = User.findByIdAndUpdate({ _id: id }, { ...userData })
+
+			return response
+		} catch (err) {
+			console.error('Error trying to update a user into DB: ', err)
+			throw new Error('Error al modificar la base de datos')
+		}
+	}
+
+	async updateByEmail(email: string, userData: any) {
+		try {
+			if ( userData.password ) {
+				const password = await bcrypt.hash(userData.password, 10)
+				userData.password = password
+			}
+
+			const response = User.findOneAndUpdate({ email }, { ...userData })
 
 			return response
 		} catch (err) {
