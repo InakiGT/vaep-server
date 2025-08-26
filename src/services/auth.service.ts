@@ -46,16 +46,25 @@ class AuthService {
 	}
 
 	async generateToken(email: string) {
-		const payload = {
-			sub: email,
-			exp: Math.floor(Date.now() / 1000) + (60 * 60),
+		try {
+			const user = this.userService.findUserByEmail(email)
+
+			if (!user) {
+				throw new Error('No existe el usuario')
+			}
+			const payload = {
+				sub: email,
+				exp: Math.floor(Date.now() / 1000) + (60 * 60),
+			}
+
+			const token = jwt.sign(payload, config.jwtSecret)
+
+			await sendEmail(email, token)
+
+			return true
+		} catch (err) {
+			throw err
 		}
-
-		const token = jwt.sign(payload, config.jwtSecret)
-
-		await sendEmail(email, token)
-
-		return true
 	}
 
 	async resetPassword(email: string, newPassword: string) {
