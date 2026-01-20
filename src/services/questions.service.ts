@@ -45,29 +45,26 @@ class QuestionsService {
 		let data
 
 		try {
-			if ( typeof themes === 'string' ) {
-				const openQuestions = await OpenQuestion.find({ theme: themes })
-				const multipleChoiceQuestions = await MultipleChoiceQuestion.find({ theme: themes })
+		const themesArray = typeof themes === 'string' ? [themes] : themes;
 
+		const [allOpen, allMultiple] = await Promise.all([
+				OpenQuestion.find({ theme: { $in: themesArray } }),
+				MultipleChoiceQuestion.find({ theme: { $in: themesArray } })
+		]);
+
+		if (typeof themes === 'string') {
 				data = {
-					themes,
-					openQuestions,
-					multipleChoiceQuestions
-				}
-			} else {
-				data = await Promise.all(
-					themes.map(async theme => {
-						const openQuestions = await OpenQuestion.find({ theme })
-						const multipleChoiceQuestions = await MultipleChoiceQuestion.find({ theme })
-
-						return {
-							theme,
-							openQuestions,
-							multipleChoiceQuestions
-						}
-					})
-				)
-			}
+						themes,
+						openQuestions: allOpen,
+						multipleChoiceQuestions: allMultiple
+				};
+		} else {
+				data = themesArray.map(t => ({
+						theme: t,
+						openQuestions: allOpen.filter(q => q.theme.toString() === t.toString()),
+						multipleChoiceQuestions: allMultiple.filter(q => q.theme.toString() === t.toString())
+				}));
+		}
 
 			return data
 		}	catch (err) {
